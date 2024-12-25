@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concert Tickets</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Choose Your Concert</h1>
+    <div class="tickets">
+      <% tickets.forEach(ticket => { %>
+      <div class="ticket">
+        <img src="<%= ticket.src %>" alt="<%= ticket.name %>" />
+        <div class="ticket-content">
+          <h3><%= ticket.name %></h3>
+          <p>📅 <%= ticket.tgl_konser %></p>
+          <p>📍 <%= ticket.lokasi %></p>
+          <p class="price">Rp <%= ticket.harga %></p>
+          <button onclick="selectTicket('<%= ticket.name %>')" class="btn">Beli tiket</button>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+
+    <!-- Modal -->
+    <div id="ticketModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="selectedTicket"></h2>
+        <form id="bookingForm" action="/tickets/book" method="POST">
+          <input type="hidden" name="ticketName" id="ticketName" />
+          <input type="text" name="name" placeholder="Full Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="tel" name="phone" placeholder="Phone Number" required />
+          <input type="date" name="birthDate" required />
+          <input
+            type="number"
+            name="ticketCount"
+            placeholder="Number of Tickets"
+            required
+          />
+          <button type="submit">Book Now</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function selectTicket(ticketName) {
+        // Set the ticket name in the modal
+        document.getElementById(
+          "selectedTicket"
+        ).textContent = `Booking for ${ticketName}`;
+        document.getElementById("ticketName").value = ticketName;
+
+        // Show the modal
+        document.getElementById("ticketModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        // Hide the modal
+        document.getElementById("ticketModal").style.display = "none";
+      }
+
+      // Close modal when clicking outside the content
+      window.onclick = function (event) {
+        const modal = document.getElementById("ticketModal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
