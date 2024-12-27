@@ -1,74 +1,116 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-h1 {
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1a1a2e;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Heading styles */
+h1,
+h2 {
+  color: white;
   text-align: center;
-  margin: 20px 0;
-  color: #333;
 }
+
+h1 {
+  font-family: "Bebas Neue", serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+h2#desc {
+  font-family: "pacifico", serif;
+  font-weight: lighter;
+  font-size: 1.3rem;
+  padding: 8px 50px;
+  border: none;
+  border-radius: 50px;
+  margin-bottom: 30px;
+  background-color: #e94560;
+}
+
+/* Container for tickets */
 .tickets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
 }
+
+/* Individual ticket card */
 .ticket {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .ticket:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
+
 .ticket img {
   width: 100%;
-  height: 150px;
+  height: auto;
   object-fit: cover;
 }
+
 .ticket-content {
   padding: 15px;
   text-align: center;
 }
+
 .ticket-content h3 {
-  margin: 10px 0;
-  font-size: 1.2rem;
-  color: #333;
-}
-.ticket-content p {
-  margin: 5px 0;
-  font-size: 0.9rem;
-  color: #555;
-}
-.ticket-content .price {
-  font-weight: bold;
-  color: #e94560;
-}
-.ticket-content .btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #1e90ff;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-.ticket-content .btn:hover {
-  background-color: #007acc;
+  font-size: 1.25rem;
+  color: #1a1a2e;
+  margin-bottom: 10px;
 }
 
-/* Modal Overlay */
+.ticket-content p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.ticket-content .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e94560;
+  margin-bottom: 20px;
+}
+
+.ticket-content .btn {
+  background-color: #e94560;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.ticket-content .btn:hover {
+  background-color: #ff6b81;
+}
+
+/* Modal styles */
 .modal {
   display: none;
   position: fixed;
@@ -76,58 +118,56 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Background overlay */
+  background: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal Content */
 .modal-content {
-  background: #1a1a2e; /* Dark background */
+  background: #1a1a2e;
   padding: 30px;
-  border-radius: 15px;
-  width: 90%;
+  border-radius: 10px;
   max-width: 500px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  animation: slideIn 0.3s ease-out;
-  color: white; /* White text */
-  position: relative;
+  width: 100%;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content h2 {
   margin-bottom: 20px;
   font-size: 1.5rem;
-  color: #e94560; /* Vibrant red for the title */
-  text-align: center;
+  color: #e94560;
 }
 
-.modal-content input,
-.modal-content button {
+.modal-content input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: none;
   border-radius: 5px;
+  background: #cfcfcf;
+  color: #757575;
   font-size: 1rem;
 }
 
-.modal-content input {
-  background: #333; /* Input background */
-  color: #fff; /* Input text color */
-  outline: none;
-}
-
 .modal-content button {
-  background: #e94560; /* Button background */
-  color: #fff; /* Button text color */
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #e94560;
+  color: white;
   font-weight: bold;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
 }
 
 .modal-content button:hover {
-  background: #ff6b81; /* Hover effect */
+  background-color: #ff6b81;
 }
 
 .close {
@@ -136,18 +176,25 @@ h1 {
   right: 15px;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
+  color: white;
   cursor: pointer;
 }
 
-/* Slide-in animation */
-@keyframes slideIn {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
+/* Media query for mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .ticket-content h3 {
+    font-size: 1.1rem;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  .ticket-content p {
+    font-size: 0.9rem;
+  }
+
+  .ticket-content .price {
+    font-size: 1rem;
+  }
+
+  .ticket-content .btn {
+    font-size: 0.9rem;
   }
 }

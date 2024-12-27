@@ -3,11 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Concert Tickets</title>
+    <title>Concertify - Order Event Tickets</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <h1>Choose Your Concert</h1>
+    <h2 id="desc">Event Terdekat</h2>
     <div class="tickets">
       <% tickets.forEach(ticket => { %>
       <div class="ticket">
@@ -17,7 +24,9 @@
           <p>📅 <%= ticket.tgl_konser %></p>
           <p>📍 <%= ticket.lokasi %></p>
           <p class="price">Rp <%= ticket.harga %></p>
-          <button onclick="selectTicket('<%= ticket.name %>')" class="btn">Beli tiket</button>
+          <button onclick="selectTicket('<%= ticket.name %>')" class="btn">
+            Beli tiket
+          </button>
         </div>
       </div>
       <% }); %>
