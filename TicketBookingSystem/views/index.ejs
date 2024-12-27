@@ -64,6 +64,38 @@
 
         // Show the modal
         document.getElementById("ticketModal").style.display = "flex";
+        
+        const bookingForm = document.getElementById("bookingForm");
+
+        bookingForm.addEventListener("submit", (event) => {
+          const name = bookingForm.name.value.trim();
+          const email = bookingForm.email.value.trim();
+          const phone = bookingForm.phone.value.trim();
+          const ticketCount = bookingForm.ticketCount.value.trim();
+
+          // Regular expressions for validation
+          const nameRegex = /^[A-Za-z\s]{3,50}$/;
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const phoneRegex = /^[0-9]{10,15}$/;
+          const ticketCountRegex = /^[1-9][0-9]?$/;
+
+          // Validate each field
+          if (!nameRegex.test(name)) {
+            alert(
+              "Invalid name. Use only letters and spaces (3-50 characters)."
+            );
+            event.preventDefault();
+          } else if (!emailRegex.test(email)) {
+            alert("Invalid email format.");
+            event.preventDefault();
+          } else if (!phoneRegex.test(phone)) {
+            alert("Invalid phone number. Use 10-15 digits.");
+            event.preventDefault();
+          } else if (!ticketCountRegex.test(ticketCount)) {
+            alert("Invalid ticket count. Enter a number between 1-99.");
+            event.preventDefault();
+          }
+        });
       }
 
       function closeModal() {

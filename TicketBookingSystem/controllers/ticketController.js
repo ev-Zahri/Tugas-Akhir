@@ -55,19 +55,34 @@ const ticketController = {
 
   bookTicket: (req, res) => {
     const { name, email, phone, birthDate, ticketCount } = req.body;
-    if (!name || !email || !phone || !birthDate || !ticketCount) {
-      return res.status(400).send("All fields are required!");
+
+    // Regular expressions for validation
+    const nameRegex = /^[A-Za-z\s]{3,50}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{10,15}$/;
+    const ticketCountRegex = /^[1-9][0-9]?$/;
+
+    // Validate each field
+    if (!nameRegex.test(name)) {
+      return res.status(400).send("Invalid name. Use only letters and spaces (3-50 characters).");
+    }
+    if (!emailRegex.test(email)) {
+      return res.status(400).send("Invalid email format.");
+    }
+    if (!phoneRegex.test(phone)) {
+      return res.status(400).send("Invalid phone number. Use 10-15 digits.");
+    }
+    if (!ticketCountRegex.test(ticketCount)) {
+      return res.status(400).send("Invalid ticket count. Enter a number between 1-99.");
     }
 
-    // Simulasi penyimpanan data pemesanan (tidak menggunakan database)
-    console.log(`Ticket booked for ${name}:`, {
-      email,
-      phone,
-      birthDate,
-      ticketCount,
-    });
-
-    res.send(`Booking confirmed for ${name}! Check your email: ${email}`);
+    // Redirect to success page
+    res.redirect(`/tickets/success?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`);
+  },
+  
+  bookingSuccess: (req, res) => {
+    const { name, email } = req.query;
+    res.render("success", { name, email });
   },
 };
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Success - Concertify</title>
+    <link rel="stylesheet" href="/success.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Thank You, <%= name %>!</h1>
+      <h2>Your Booking is Confirmed</h2>
+      <p>
+        We’ve sent the details of your booking to your email: 
+        <br /><strong><%= email %></strong>.
+        <br />
+        Please check your inbox for further information.
+      </p>
+      <a href="/tickets" class="button">Back to Home</a>
+    </div>
+  </body>
+</html>
